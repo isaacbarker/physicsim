@@ -8,9 +8,8 @@ The project makes use of [p5.js](https://p5js.org/) and is inspired by Daniel Sh
 
 If you have any issues using the project please open a ticket on Github or email [phys@isaacbarker.net](mailto:phys@isaacbarker.net).
 
-I hope you enjoy exploring the project.
+I hope you enjoy exploring the project,
 
-Isaac.
+Isaac Barker
 
 [isaacbarker.net](https://isaacbarker.net)<br>
-[isaac@isaacbarker.net](mailto:isaac@isaacbarker.net)
