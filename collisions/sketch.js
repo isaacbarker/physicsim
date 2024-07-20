@@ -59,8 +59,8 @@ function draw() {
     }
 
     // update displayed information
-    document.getElementById('Av').innerHTML = `V<sub>1</sub> = ${particleA.velocity.mag().toFixed(2)} m/s`;
-    document.getElementById('Bv').innerHTML = `V<sub>2</sub> = ${particleB.velocity.mag().toFixed(2)} m/s`;
+    document.getElementById('Av').innerHTML = `V<sub>a</sub> = ${particleA.velocity.mag().toFixed(2)} m/s`;
+    document.getElementById('Bv').innerHTML = `V<sub>b</sub> = ${particleB.velocity.mag().toFixed(2)} m/s`;
     document.getElementById('Am').innerHTML = `mass of A = ${particleA.mass.toFixed(2)} kg`;
     document.getElementById('Bm').innerHTML = `mass of B = ${particleB.mass.toFixed(2)} kg`;
 
@@ -176,7 +176,7 @@ document.getElementById('ctrls-runsim-btn').addEventListener('click', () => {
 
     setup()
     paused = false;
-    document.getElementById('collt').innerHTML = '';
+    document.getElementById('table-data').innerHTML = '';
 
 })
 
@@ -194,7 +194,7 @@ document.getElementById('e').addEventListener('change', () => {
 // download data
 document.getElementById('download-momentum').addEventListener('click', () => {
     let data = particleA.collisions;
-    let headers = 'p1x, p2x, p1y, p2y, p1z, p2z, p1x\', p2x\', p1y\', p2y\', p1z\', p2z\'\n'
+    let headers = 'pax, pbx, pay, pby, paz, pbz, pax\', pbx\', pay\', pby\', paz\', pbz\'\n'
     let strData = data.map(row => row.join(",")).join("\n");
     let csvData = headers.concat(strData);
     let blob = new Blob([csvData], { type: 'text/csv' });
@@ -212,7 +212,7 @@ document.getElementById('download-momentum').addEventListener('click', () => {
 document.getElementById('download-velocity').addEventListener('click', () => {
     let data = particleA.collisions;
 
-    let headers = 'v1x, v2x, v1y, v2y, v1z, v2z, v1x\', v2x\', v1y\', v2y\', v1z\', v2z\n'
+    let headers = 'vax, vbx, vay, vby, vaz, vbz, vax\', vbx\', vay\', vby\', vaz\', vbz\'\n'
 
     // divide by mass of each particle
     let strData = data.map(row => { 
