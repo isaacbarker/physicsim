@@ -17,7 +17,7 @@ function setup() {
     createCanvas(window.innerWidth / 2, 760, WEBGL, document.getElementById('sketch'));
     particleA = new Particle(massA, posA[0], posA[1], posA[2], velA[0], velA[1], velA[2]);
     particleB = new Particle(massB, posB[0], posB[1], posB[2], velB[0], velB[1], velB[2]);
-    }
+}
 
 function draw() {
 
@@ -103,7 +103,8 @@ document.getElementById('ctrls-runsim-btn').addEventListener('click', () => {
         tempVelAZ = Math.random() * (2 - 0.5) + 0.5
     }
 
-    velA = [parseFloat(tempVelAX), parseFloat(tempVelAY), parseFloat(tempVelAZ)];
+
+    velA = [parseFloat(tempVelAX), -parseFloat(tempVelAY), parseFloat(tempVelAZ)];
 
     let tempVelBX = document.getElementById('velBx').value;
     let tempVelBY = document.getElementById('velBy').value;
@@ -121,7 +122,7 @@ document.getElementById('ctrls-runsim-btn').addEventListener('click', () => {
         tempVelBZ = Math.random() * (2 - 0.5) + 0.5
     }
 
-    velB = [parseFloat(tempVelBX), parseFloat(tempVelBY), parseFloat(tempVelBZ)];
+    velB = [parseFloat(tempVelBX), -parseFloat(tempVelBY), parseFloat(tempVelBZ)];
 
     // set positions
     let tempPosAX = document.getElementById('posAx').value;
@@ -140,7 +141,7 @@ document.getElementById('ctrls-runsim-btn').addEventListener('click', () => {
         tempPosAZ = 0;
     }
 
-    posA = [parseFloat(tempPosAX) * 60, parseFloat(tempPosAY) * 60, parseFloat(tempPosAZ) * 60];
+    posA = [parseFloat(tempPosAX) * 60, -parseFloat(tempPosAY) * 60, parseFloat(tempPosAZ) * 60];
 
     let tempPosBX = document.getElementById('posBx').value;
     let tempPosBY = document.getElementById('posBy').value;

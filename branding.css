@@ -58,4 +58,9 @@
 
 .ib-footer__link {
     color: #fff;
+    transition: all 250ms;
+}
+
+.ib-footer__link:hover {
+    text-decoration-color: var(--bs-border-color);
 }
