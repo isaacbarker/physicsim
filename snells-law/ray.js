@@ -1,19 +1,17 @@
 class Ray {
   
-    constructor(src, dir) {
+    constructor(src, dir, n) {
       this.src = src;
       this.dir = dir.normalize();
+      this.n = n;
     }
     
     draw(scene) {
-      
-      push()
-      fill(255,255,204)
-      stroke(0, 0, 0, 0)
+
+      push();
       translate(this.src);
-      sphere(10);
+      sphere(1);
       pop();
-      
       
       // check for intersection with geometry to find first plane which is interacted width
       let dist = Infinity;
@@ -84,6 +82,29 @@ class Ray {
           stroke(0, 0, 0);
           line(0, 0, 0, plane[1].x * 10, plane[1].y * 10, plane[1].z * 10);
           pop();  
+
+          // calculate new vector after
+          let negativeN = p5.Vector.mult(plane[1], -1)
+          let cosi = p5.Vector.dot(negativeN, this.dir);
+          let cosr = Math.sqrt(1 - Math.pow((this.n / geometry.n), 2) * (1 - Math.pow(cosi, 2)));
+          let nMultL = p5.Vector.mult(this.dir, (this.n / geometry.n));
+          let angMultN = p5.Vector.mult(plane[1], ((this.n / geometry.n) * cosi - cosr))
+          let ref = p5.Vector.add(nMultL, angMultN);
+
+          let refractedRay = new Ray(intersection, ref, geometry.n);
+
+          refractedRay.draw(scene);
+
+          // draw refracted ray
+
+          /*
+          push();
+          translate(intersection);
+          stroke(255, 0, 255);
+          line(0, 0, 0, ref.x * 10, ref.y * 10, ref.z * 10);
+          pop();
+          */
+
         }
     }
     

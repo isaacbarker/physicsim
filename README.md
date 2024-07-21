@@ -10,6 +10,5 @@ If you have any issues using the project please open a ticket on Github or email
 
 I hope you enjoy exploring the project,
 
-Isaac Barker
-
-[isaacbarker.net](https://isaacbarker.net)<br>
+__Isaac Barker__
+<br>[isaacbarker.net](https://isaacbarker.net)<br>
