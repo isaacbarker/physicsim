@@ -26,7 +26,8 @@ function setup() {
 }
 
 function draw() {
-  background(220);
+  background(255);
+  ambientLight(255);
   
   let x = sliderX.value();
   let y = sliderY.value();

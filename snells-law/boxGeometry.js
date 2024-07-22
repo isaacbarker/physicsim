@@ -50,7 +50,7 @@ class BoxGeometry {
         push();
         translate(p);
         stroke(255, 0, 0, 100)
-        line(0, 0, 0, n.x * 10, n.y * 10, n.z * 10);
+        // line(0, 0, 0, n.x * 10, n.y * 10, n.z * 10);
         pop();
       }
       

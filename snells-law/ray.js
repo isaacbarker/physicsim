@@ -106,20 +106,16 @@ class Ray {
           }
 
           // Check for TIR
-          let cosc = Math.sqrt((1 - Math.pow((n2/n1), 2)));
+          let cosc = Math.sqrt(1 - Math.pow((n2/n1), 2));
           let c = acos(cosc);
-
-          document.getElementById('critical').innerHTML = c;
 
           let negativeN = p5.Vector.mult(n, -1);
           let cosi = p5.Vector.dot(negativeN, this.dir);
           let i = acos(cosi);
 
-          document.getElementById('incidence').innerHTML = i
-
           let ref;
 
-          if (i > c && (n2 / n1) < 0) {
+          if (i > c && (n2 / n1) < 1) {
             // total internal reflection
             let cosN = p5.Vector.mult(n, (2*cosi));
             n2 = n1;
@@ -133,7 +129,7 @@ class Ray {
           }
 
           let newRay = new Ray(intersection, ref, n2, plane);
-
+          /*
           if (n2 == 1 && i < c) {
             push();
             translate(intersection);
@@ -146,6 +142,7 @@ class Ray {
             pop();
             return;
           }
+          */
 
           newRay.draw(scene);
 
