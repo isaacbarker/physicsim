@@ -1,9 +1,10 @@
 class Ray {
   
-    constructor(src, dir, n) {
+    constructor(src, dir, n, history) {
       this.src = src;
       this.dir = dir.normalize();
       this.n = n;
+      this.history = history;
     }
     
     draw(scene) {
@@ -25,7 +26,12 @@ class Ray {
         // check for intersection with each plane 
         for (let j = 0; j < geo.planes.length; j++) {
           let pln = geo.planes[j];
-          let p = pln[0]
+
+          if (pln == this.history) {
+            continue;
+          }
+
+          let p = pln[0];
           let n = pln[1];
   
           // get into format of ax + by + cz = d
@@ -59,7 +65,7 @@ class Ray {
           }
   
           if (Math.abs(n.dot(x) - d) < 1e-6) {
-              if (Math.abs(t) < dist) {
+              if (Math.abs(t) < dist && t > 0) {
                   dist = Math.abs(t);
                   intersection = x;
                   plane = pln;
@@ -70,6 +76,7 @@ class Ray {
       }
       
       if (intersection) {
+
           // draw ray
           push();
           stroke(255, 255, 0, 255);
@@ -84,28 +91,76 @@ class Ray {
           pop();  
 
           // calculate new vector after
-          let negativeN = p5.Vector.mult(plane[1], -1)
+          let n1 = this.n;
+          let n2;
+          let n;
+
+          // check if ray is already inside the geometry
+          if (geometry.isInside(this.src)) {
+            n1 = geometry.n;
+            n2 = 1;
+            n = p5.Vector.mult(plane[1], -1)
+          } else {
+            n2 = geometry.n;
+            n = plane[1]
+          }
+
+          // Check for TIR
+          let cosc = Math.sqrt((1 - Math.pow((n2/n1), 2)));
+          let c = acos(cosc);
+
+          document.getElementById('critical').innerHTML = c;
+
+          let negativeN = p5.Vector.mult(n, -1);
           let cosi = p5.Vector.dot(negativeN, this.dir);
-          let cosr = Math.sqrt(1 - Math.pow((this.n / geometry.n), 2) * (1 - Math.pow(cosi, 2)));
-          let nMultL = p5.Vector.mult(this.dir, (this.n / geometry.n));
-          let angMultN = p5.Vector.mult(plane[1], ((this.n / geometry.n) * cosi - cosr))
-          let ref = p5.Vector.add(nMultL, angMultN);
+          let i = acos(cosi);
 
-          let refractedRay = new Ray(intersection, ref, geometry.n);
+          document.getElementById('incidence').innerHTML = i
 
-          refractedRay.draw(scene);
+          let ref;
 
-          // draw refracted ray
+          if (i > c && (n2 / n1) < 0) {
+            // total internal reflection
+            let cosN = p5.Vector.mult(n, (2*cosi));
+            n2 = n1;
+            ref = p5.Vector.add(this.dir, cosN);
+          } else {
+            let cosr = Math.sqrt(1 - Math.pow((n1 / n2), 2) * (1 - Math.pow(cosi, 2)));
+            let nMultL = p5.Vector.mult(this.dir, (n1 / n2));
+            let angMultN = p5.Vector.mult(n, ((n1 / n2) * cosi - cosr))
+    
+            ref = p5.Vector.add(nMultL, angMultN);
+          }
 
-          /*
-          push();
-          translate(intersection);
-          stroke(255, 0, 255);
-          line(0, 0, 0, ref.x * 10, ref.y * 10, ref.z * 10);
-          pop();
-          */
+          let newRay = new Ray(intersection, ref, n2, plane);
 
-        }
+          if (n2 == 1 && i < c) {
+            push();
+            translate(intersection);
+            sphere(1);
+            pop();
+            push();
+            translate(intersection);
+            stroke(255, 255, 0, 255);
+            line(0, 0, 0, newRay.dir.x*100, newRay.dir.y*100, newRay.dir.z*100);
+            pop();
+            return;
+          }
+
+          newRay.draw(scene);
+
+      } else {
+        push();
+        translate(this.src);
+        sphere(1);
+        pop();
+
+        push();
+        translate(this.src);
+        stroke(255, 255, 0, 255);
+        line(0, 0, 0, this.dir.x*10, this.dir.y*10, this.dir.z*10)
+        pop();
+      }
     }
     
 }

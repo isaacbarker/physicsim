@@ -61,5 +61,16 @@ class BoxGeometry {
       box(this.w, this.h, this.d, 4, 4);
       pop();
     }
+
+    isInside(point) {
+      if (point.x >= -this.w / 2 && point.y <= this.w / 2
+        && point.y >= -this.h / 2 && point.y <= this.h / 2 
+        && point.z >= -this.d / 2 && point.z <= this.d / 2 
+      ) {
+        return true;
+      } else {
+        return false;
+      }
+    }
     
   }
