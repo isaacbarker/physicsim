@@ -2,41 +2,40 @@ let ray;
 let scene = []
 
 function setup() {
-  createCanvas(1080, 720, WEBGL, document.getElementById('sketch'));
+  createCanvas(window.innerWidth * 0.75, 760, WEBGL, document.getElementById('sketch'));
   gl = this._renderer.GL;
   gl.enable(gl.BLEND);
   gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);   
-  ray = new Ray(createVector(0, 0, 0), createVector(50, 15, 0), 1);
+  ray = new Ray(createVector(0, 0, 0), createVector(50, 15, 0), 1, true);
   scene.push(new BoxGeometry(75, 10, 40, createVector(0, 0, 0), 1.5));
-  //scene.push(new BoxGeometry(100, 20, 30, createVector(10, -50, 30), 1.5))
-  
-  // sliders for pos
-  sliderX = createSlider(-200, 200, 10);
-  sliderX.position(10, 410);
-  sliderX.size(80)  
-  sliderY = createSlider(-200, 200, 30);
-  sliderY.position(10, 430);
-  sliderY.size(80)
-  sliderZ = createSlider(-200, 200, 0);
-  sliderZ.position(10, 450);
-  sliderZ.size(80)
-  sliderN = createSlider(0, 2, 1, 0.01);
-  sliderN.position(10, 470);
-  sliderN.size(80)  
 }
 
 function draw() {
-  background(255);
+  background(0);
   ambientLight(255);
+  perspective(0.2, (width / height), 10, 500000)
   
-  let x = sliderX.value();
-  let y = sliderY.value();
-  let z = sliderZ.value();
-  let n = sliderN.value();
+  // load values from ui
+  let posX = parseFloat(document.getElementById('posX').value);
+  let posY = parseFloat(document.getElementById('posY').value);
+  let posZ = parseFloat(document.getElementById('posZ').value);
+
+  let dirX = parseFloat(document.getElementById('dirX').value);
+  let dirY = parseFloat(document.getElementById('dirY').value);
+  let dirZ = parseFloat(document.getElementById('dirZ').value);
+
+  let n = parseFloat(document.getElementById('n').value);
   
-  ray.src.y = -y;
-  ray.src.x = x;
-  ray.src.z = z;
+  ray.src.x = posX;
+  ray.src.y = -posY;
+  ray.src.z = posZ;
+
+  ray.dir.x = dirX;
+  ray.dir.y = -dirY;
+  ray.dir.z = dirZ;
+
+  ray.dir.normalize();
+
   scene[0].n = n;
   
   // debugMode()

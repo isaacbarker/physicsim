@@ -1,18 +1,21 @@
 class Ray {
   
-    constructor(src, dir, n, history) {
+    constructor(src, dir, n, isSource) {
       this.src = src;
       this.dir = dir.normalize();
       this.n = n;
-      this.history = history;
+      this.isSource = isSource;
     }
     
     draw(scene) {
 
-      push();
-      translate(this.src);
-      sphere(1);
-      pop();
+      if (this.isSource) {
+        push();
+        translate(this.src);
+        fill(255, 255, 0)
+        sphere(1, 128, 128);
+        pop();
+      }
       
       // check for intersection with geometry to find first plane which is interacted width
       let dist = Infinity;
@@ -26,10 +29,6 @@ class Ray {
         // check for intersection with each plane 
         for (let j = 0; j < geo.planes.length; j++) {
           let pln = geo.planes[j];
-
-          if (pln == this.history) {
-            continue;
-          }
 
           let p = pln[0];
           let n = pln[1];
@@ -52,15 +51,7 @@ class Ray {
           let x = p5.Vector.add(this.src, tDir);
   
           // Check if point lies in the cube
-          if (x.x < -geo.w / 2 || x.x > geo.w / 2) {
-            continue;
-          }
-  
-          if (x.y < -geo.h / 2 || x.y > geo.h / 2) {
-            continue;
-          }      
-  
-          if (x.z < -geo.d / 2 || x.z > geo.d / 2) {
+          if (!geo.isInside(x)) {
             continue;
           }
   
@@ -86,8 +77,8 @@ class Ray {
           // draw normal at point
           push();
           translate(intersection);
-          stroke(0, 0, 0);
-          line(0, 0, 0, plane[1].x * 10, plane[1].y * 10, plane[1].z * 10);
+          stroke(255, 255, 255, 240);
+          line(plane[1].x * -7.5, plane[1].y * -7.5, plane[1].z * -7.5, plane[1].x * 7.5, plane[1].y * 7.5, plane[1].z * 7.5);
           pop();  
 
           // calculate new vector after
@@ -128,34 +119,15 @@ class Ray {
             ref = p5.Vector.add(nMultL, angMultN);
           }
 
-          let newRay = new Ray(intersection, ref, n2, plane);
-          /*
-          if (n2 == 1 && i < c) {
-            push();
-            translate(intersection);
-            sphere(1);
-            pop();
-            push();
-            translate(intersection);
-            stroke(255, 255, 0, 255);
-            line(0, 0, 0, newRay.dir.x*100, newRay.dir.y*100, newRay.dir.z*100);
-            pop();
-            return;
-          }
-          */
+          let newRay = new Ray(intersection, ref, n2, false);
 
           newRay.draw(scene);
 
       } else {
         push();
         translate(this.src);
-        sphere(1);
-        pop();
-
-        push();
-        translate(this.src);
         stroke(255, 255, 0, 255);
-        line(0, 0, 0, this.dir.x*10, this.dir.y*10, this.dir.z*10)
+        line(0, 0, 0, this.dir.x*50, this.dir.y*50, this.dir.z*50)
         pop();
       }
     }

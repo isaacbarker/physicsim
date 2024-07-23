@@ -42,28 +42,18 @@ class BoxGeometry {
     }
     
     show() {  
-      // draw normals
-      for (let i = 0; i < this.planes.length; i++) {
-        let p = this.planes[i][0];
-        let n = this.planes[i][1];
-        
-        push();
-        translate(p);
-        stroke(255, 0, 0, 100)
-        // line(0, 0, 0, n.x * 10, n.y * 10, n.z * 10);
-        pop();
-      }
-      
       // draw box geometry
       push();
       translate(this.c);
-      fill(255, 200, 255, 100)
+      stroke(255, 255, 255, 200);
+      fill(0, 200, 255, 100)
       box(this.w, this.h, this.d, 4, 4);
       pop();
     }
 
     isInside(point) {
-      if (point.x >= -this.w / 2 && point.y <= this.w / 2
+      // check if point lies on the surface or inside the geometry
+      if (point.x >= -this.w / 2 && point.x <= this.w / 2
         && point.y >= -this.h / 2 && point.y <= this.h / 2 
         && point.z >= -this.d / 2 && point.z <= this.d / 2 
       ) {
