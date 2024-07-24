@@ -52,10 +52,11 @@ class BoxGeometry {
     }
 
     isInside(point) {
+
       // check if point lies on the surface or inside the geometry
-      if (point.x >= -this.w / 2 && point.x <= this.w / 2
-        && point.y >= -this.h / 2 && point.y <= this.h / 2 
-        && point.z >= -this.d / 2 && point.z <= this.d / 2 
+      if (point.x >= this.c.x - this.w / 2 - UNCERTAINTY && point.x <= this.c.x + this.w / 2 + UNCERTAINTY
+        && point.y >= this.c.y - this.h / 2 - UNCERTAINTY && point.y <= this.c.y + this.h / 2 + UNCERTAINTY
+        && point.z >= this.c.z - this.d / 2 - UNCERTAINTY && point.z <= this.c.z + this.d / 2 + UNCERTAINTY
       ) {
         return true;
       } else {
