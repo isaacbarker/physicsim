@@ -28,6 +28,19 @@
     transform: scale(110%);
 }
 
+.ps-header__home {
+    left: 0;
+    position: absolute;
+    margin-left: 1em;
+    height: 40px;
+    width: 40px;
+    transition: all 250ms;
+}
+
+.ps-header__home:hover {
+    transform: scale(110%);
+}
+
 .ib-footer__wrapper {
     overflow-x: hidden;
     height: 65px;

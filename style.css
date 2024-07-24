@@ -5,6 +5,47 @@ body, html {
     overflow-x: hidden;
 }
 
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    margin-bottom: 4em;
+}
+
+.grid-item-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.grid-item {
+    width: 20vw;
+    border-radius: 1em;
+    -webkit-box-shadow: 0px 0px 45px -7px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 0px 45px -7px rgba(0,0,0,0.75);
+    box-shadow: 0px 0px 45px -7px rgba(0,0,0,0.75);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 1em;
+    background-color: var(--bs-dark-bg-subtle);
+}
+
+.grid-item__img {
+    width: 99%;
+    height: auto;
+    margin-bottom: 1em;
+    border-radius: 1em;
+}
+
+.grid-item__title {
+    text-align: center;
+}
+
+.grid-item__description {
+    text-align: center;
+}
+
 .wrapper {
     display: flex;
     justify-content: center;

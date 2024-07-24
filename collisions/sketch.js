@@ -6,8 +6,8 @@ let massA = Math.floor(Math.random() * 5) + 1;
 let massB = Math.floor(Math.random() * 5) + 1;
 let velA = [Math.random() * (2 - 0.5) + 0.5, Math.random() * (2 - 0.5) + 0.5, Math.random() * (2 - 0.5) + 0.5];
 let velB = [Math.random() * (2 - 0.5) + 0.5, Math.random() * (2 - 0.5) + 0.5, Math.random() * (2 - 0.5) + 0.5];
-let posA = [-100, 0, 0];
-let posB = [100, 0, 0];
+let posA = [-75, 0, 0];
+let posB = [75, 0, 0];
 let size = 2 * 60;
 let e = 1;
 
@@ -25,7 +25,7 @@ function draw() {
 
     background(0);
     orbitControl();
-    perspective(0.2, (width / height), 10, 500000)
+    perspective(0.4, (width / height), 10, 500000)
 
     directionalLight(255, 0, 0, 0, 1, 0);
     directionalLight(0, 0, 255, 0, -1, 0);

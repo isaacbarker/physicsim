@@ -62,7 +62,7 @@ document.getElementById('ctrls-runsim-btn').addEventListener('click', () => {
     let tempPosAZ = document.getElementById('posAz').value;
 
     if (tempPosAX == '') {
-        tempPosAX = -100 / 60;
+        tempPosAX = -75 / 60;
     }
 
     if (tempPosAY == '') {
@@ -80,7 +80,7 @@ document.getElementById('ctrls-runsim-btn').addEventListener('click', () => {
     let tempPosBZ = document.getElementById('posBz').value;
 
     if (tempPosBX == '') {
-        tempPosBX = 100 / 60;
+        tempPosBX = 75 / 60;
     }
 
     if (tempPosBY == '') {
