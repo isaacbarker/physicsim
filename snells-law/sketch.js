@@ -10,7 +10,7 @@ function setup() {
   gl.enable(gl.BLEND);
   gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);   
   ray = new Ray(createVector(0, 0, 0), createVector(50, 15, 0), 1, true);
-  scene.push(new BoxGeometry(75, 10, 40, createVector(0, 0, 0), 1.5));
+  scene.push(new BoxGeometry(75, 15, 40, createVector(0, 0, 0), 1.5));
 }
 
 function draw() {
