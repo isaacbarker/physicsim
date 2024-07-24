@@ -5,6 +5,19 @@ body, html {
     overflow-x: hidden;
 }
 
+.welcome-msg {
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 1em;
+}
+
+.welcome-msg__description {
+    text-align: center;
+}
+
 .grid-container {
     display: grid;
     grid-template-columns: repeat(3, 1fr);

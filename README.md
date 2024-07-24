@@ -1,6 +1,6 @@
 ![PHYSICSim](./imgs/dark-transparent.png)
 
-**Welcome to PHYSICSim: Interactive and Modern Physics Simulations.**
+**Welcome to PHYSICSim.**
 
 This project stems from my Physics studies and aims to assist my revision by creating simulations based on the topics I study to allow me to expand me knowledge.
 
