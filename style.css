@@ -32,6 +32,7 @@ body, html {
 
 .grid-item {
     width: 20vw;
+    height: 100%;
     border-radius: 1em;
     -webkit-box-shadow: 0px 0px 45px -7px rgba(0,0,0,0.75);
     -moz-box-shadow: 0px 0px 45px -7px rgba(0,0,0,0.75);
@@ -39,7 +40,7 @@ body, html {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
     padding: 1em;
     background-color: var(--bs-dark-bg-subtle);
 }
