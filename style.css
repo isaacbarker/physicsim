@@ -5,6 +5,30 @@ body, html {
     overflow-x: hidden;
 }
 
+.loading-page {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    position: absolute;
+    top: 0;
+    left: 0;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--bs-bark-bg);
+}
+
+.loading-page__container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.loading-page__logo {
+    height: 75px;
+    width: auto;
+}
+
 .welcome-msg {
     width: 100vw;
     display: flex;
@@ -108,6 +132,7 @@ body, html {
     padding: 1em;
     max-width: 30vw;
     min-width: 20vw;
+    height: 760px;
     background-color: var(--bs-dark-bg-subtle);
     border-radius: 1em;
     -webkit-box-shadow: 0px 0px 45px -7px rgba(0,0,0,0.75);

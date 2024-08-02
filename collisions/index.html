@@ -8,9 +8,15 @@
     <link rel="stylesheet" type="text/css" href="../branding.css">
     <meta charset="utf-8" />
     <link rel="icon" type="image/png" href="../imgs/favicon.png">
-    <title>3D Collision Simulator</title>
+    <title>Physicsim (Collisions)</title>
   </head>
   <body>
+    <div class="loading-page" id="loading-page">
+        <div class="loading-page__container">
+            <img class="loading-page__logo" src="../imgs/dark-transparent.png">
+            <p class="loading-page__txt">Loading...</p>
+        </div>
+    </div>
     <div class="ps-header__wrapper">
         <a href="/">
             <img class="ps-header__img" src="../imgs/dark-transparent.png">
@@ -26,6 +32,7 @@
     </div>
     <div class="wrapper">
         <h1>3D Collision Simulator</h1>
+        <p>Pan and Zoom within the simulation pane to view in 3D. Use controls on the right to set initial conditions of the simulation.</p>
         <div class="sim-wrapper">
             <div>
                 <canvas id="sketch" class="sketch"></canvas>
@@ -118,6 +125,7 @@
         </table>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="../loading.js"></script>   
     <script src="sketch.js"></script>
     <script src="particle.js"></script>
     <script src="ui.js"></script>

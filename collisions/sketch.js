@@ -20,6 +20,8 @@ function setup() {
 }
 
 function draw() {
+    // disable loading screen on first draw
+    pageLoaded()
 
     ambientLight(200);
 
