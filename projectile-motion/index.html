@@ -8,7 +8,7 @@
     <link rel="stylesheet" type="text/css" href="../branding.css">
     <meta charset="utf-8" />
     <link rel="icon" type="image/png" href="../imgs/favicon.png">
-    <title>Physicsim (Projectiles)</title>
+    <title>Physicsim (Projectile Motion)</title>
   </head>
   <body>
     <div class="loading-page" id="loading-page">
@@ -16,6 +16,9 @@
             <img class="loading-page__logo" src="../imgs/dark-transparent.png">
             <p class="loading-page__txt">Loading...</p>
         </div>
+    </div>
+    <div class="dev-header__wrapper">
+        <p class="dev-header__txt">This website is still in development. Please report bugs or issues to <a href="mailto:enquiries@physicsim.co.uk">enquiries@physicsim.co.uk</a> or on <a href="https://github.com/isaacbarker/physicsim">Github</a>. </p>
     </div>
     <div class="ps-header__wrapper">
         <a href="/">
@@ -31,13 +34,15 @@
         </a>
     </div>
     <div class="wrapper">
-        <h1>Projectiles</h1>
+        <h1>Projectile Motion</h1>
         <p>Pan and Zoom within the simulation pane to view in 3D. Use controls on the right to set initial conditions of the simulation.</p>
         <div class="sim-wrapper">
             <div>
                 <canvas id="sketch" class="sketch"></canvas>
                 <div class="ctrl__data">
-                    <p id="v"></p>
+                    <p id="vx"></p>
+                    <p id="vy"></p>
+                    <p id="vz"></p>
                     <p id="h"></p>
                     <p id="a"></p>
                 </div>
@@ -57,7 +62,7 @@
                         <input type="range" class="form-range" min="0" max="1" value="1" step="0.01" id="e">
                     </div>
                     <div class="ctrl__form__label">
-                        <label for="velx" class="form-label">Initial Velocity (m/s)</label>
+                        <label for="velx" class="form-label">Initial Velocity (x, y, z) (m/s)</label>
                     </div>
                     <div class="ctrl__form__block--horizontal">
                         <input type="number" class="form-control" id="velx" placeholder="0">
@@ -66,7 +71,7 @@
                     </div>
 
                     <div class="ctrl__form__label">
-                        <label for="posx" class="form-label">Position (m)</label>
+                        <label for="posx" class="form-label">Initial Displacement (x, y, z) (m)</label>
                     </div>
 
                     <div class="ctrl__form__block--horizontal">
@@ -74,29 +79,11 @@
                         <input type="number" class="form-control" id="posz" placeholder="0">
                         <input type="number" class="form-control" id="posy" placeholder="10">
                     </div>
-
-                    <button class="ctrl__btn btn btn-primary" id="ctrls-runsim-btn">Run Simulation</button>
-                    <button class="ctrl__btn btn btn-secondary" id="ctrls-pause-play-btn">Pause / Play</button>
                 </div> 
+                <button class="ctrl__btn btn btn-primary" id="ctrls-runsim-btn">Run Simulation</button>
+                <button class="ctrl__btn btn btn-secondary" id="ctrls-pause-play-btn">Pause / Play</button>
             </div>  
         </div>
-        <table class="table">
-            <h1>Surface Interactions</h1>
-            <div class="table__btns">
-                <button class="table__btn btn btn-link" id="download">Download Data</button>
-            </div>
-            <thead>
-                <tr>
-                <th scope="col">i/&deg</th>
-                <th scope="col">c/&deg</th>
-                <th scope="col">r/&deg</th>
-                <th scope="col">n1</th>
-                <th scope="col">n2</th>
-                </tr>
-            </thead>
-            <tbody id="table-data">
-            </tbody>
-        </table>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script src="sketch.js"></script>

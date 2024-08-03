@@ -30,7 +30,7 @@ function draw() {
   noStroke();
   translate(0, 2, 0);
   fill(255, 255, 255)
-  box(size, 2, size);
+  box(size*2, 2, size*2);
   pop();
   
   // update particle based on playing state
@@ -54,7 +54,9 @@ function draw() {
   particle.show();
 
   // update displayed information
-  document.getElementById('v').innerHTML = `v = ${particle.vel.mag().toFixed(2)} m/s`;
-  document.getElementById('a').innerHTML = `a = ${particle.a.mag().toFixed(2)} m/s<sup>2</sup>`;
-  document.getElementById('h').innerHTML = `height = ${(-particle.pos.y - particle.r).toFixed(2)} m`;
+  document.getElementById('vx').innerHTML = `v<sub>x</sub> = ${particle.vel.x.toFixed(2)} m/s`;
+  document.getElementById('vy').innerHTML = `v<sub>y</sub> = ${particle.vel.z.toFixed(2)} m/s`;
+  document.getElementById('vz').innerHTML = `v<sub>z</sub> = ${-particle.vel.y.toFixed(2)} m/s`;
+  document.getElementById('a').innerHTML = `a<sub>z</sub> = ${particle.a.mag().toFixed(2)} m/s<sup>2</sup>`;
+  document.getElementById('h').innerHTML = `s<sub>z</sub> = ${(-particle.pos.y - particle.r).toFixed(2)} m`;
 }
