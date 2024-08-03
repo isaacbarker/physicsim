@@ -10,16 +10,15 @@ function setup() {
   gl.enable(gl.BLEND);
   gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);   
   ray = new Ray(createVector(0, 0, 0), createVector(50, 15, 0), 1, true);
-  scene.push(new BoxGeometry(75, 15, 40, createVector(0, 0, 0), 1.5));
-}
+  scene.push(new BoxGeometry(75, 15, 40, createVector(0, 0, 0), 1.5));}
 
 function draw() {
+  // disable loading screen on first draw
+  pageLoaded()
+
   background(0);
   ambientLight(255);
   perspective(0.2, (width / height), 10, 500000)
-  //camera(200, -400, 800);
-  //noLoop();
-  // debugMode()
   orbitControl()
 
   // clear data
@@ -64,7 +63,6 @@ function draw() {
     scene[i].n = n;
     scene[i].show();
   }
-
 }
 
 document.getElementById('download').addEventListener('click', () => {

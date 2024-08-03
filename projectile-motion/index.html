@@ -7,7 +7,7 @@
     <link rel="stylesheet" type="text/css" href="../style.css">
     <meta charset="utf-8" />
     <link rel="icon" type="image/png" href="../imgs/favicon.png">
-    <title>Physicsim (Collisions)</title>
+    <title>Physicsim (Projectile Motion)</title>
   </head>
   <body>
     <div class="loading-page" id="loading-page">
@@ -33,102 +33,60 @@
         </a>
     </div>
     <div class="wrapper">
-        <h1>3D Collision Simulator</h1>
+        <h1>Projectile Motion</h1>
         <p>Pan and Zoom within the simulation pane to view in 3D. Use controls on the right to set initial conditions of the simulation.</p>
         <div class="sim-wrapper">
             <div>
                 <canvas id="sketch" class="sketch"></canvas>
                 <div class="ctrl__data">
-                    <p id="Av"></p>
-                    <p id="Bv"></p>
-                    <p id="Am"></p>
-                    <p id="Bm"></p>
+                    <p id="vx"></p>
+                    <p id="vy"></p>
+                    <p id="vz"></p>
+                    <p id="h"></p>
+                    <p id="a"></p>
                 </div>
             </div>
             <div class="ctrl">
                 <div class="ctrl__form">
                     <div class="ctrl__form__block--horizontal">
-                        <label for="massA" class="form-label">Mass of A (kg)</label>
-                        <input type="number" class="form-control" id="massA" placeholder="5">
-                        <label for="massB" class="form-label">Mass of B (kg)</label>
-                        <input type="number" class="form-control" id="massB" placeholder="5">  
+                        <label for="massA" class="form-label">Mass of Particle</label>
+                        <input type="number" class="form-control" id="mass" placeholder="1">
                     </div>
                     <div class="ctrl__form__block--horizontal">
                         <label for="size" class="form-label">Simulation Size (m)</label>
-                        <input type="number" class="form-control" id="size" placeholder="2">
+                        <input type="number" class="form-control" id="size" placeholder="120">
                     </div>
                     <div class="ctrl__form__block--horizontal">
                         <label for="e" id="e-label" class="form-label">Coeffecient of Resitution (e=1.00)</label>
                         <input type="range" class="form-range" min="0" max="1" value="1" step="0.01" id="e">
                     </div>
                     <div class="ctrl__form__label">
-                        <label for="velAx" class="form-label">Velocity of A (x, y, z) (m/s)</label>
+                        <label for="velx" class="form-label">Initial Velocity (x, y, z) (m/s)</label>
                     </div>
                     <div class="ctrl__form__block--horizontal">
-                        <input type="number" class="form-control" id="velAx" placeholder="2.5">
-                        <input type="number" class="form-control" id="velAz" placeholder="2.5">
-                        <input type="number" class="form-control" id="velAy" placeholder="2.5">
+                        <input type="number" class="form-control" id="velx" placeholder="0">
+                        <input type="number" class="form-control" id="velz" placeholder="0">
+                        <input type="number" class="form-control" id="vely" placeholder="20">
                     </div>
                     <div class="ctrl__form__label">
-                        <label for="velBx" class="form-label">Velocity of B (x, y, z) (m/s)</label>
+                        <label for="posx" class="form-label">Initial Displacement (x, y, z) (m)</label>
                     </div>
                     <div class="ctrl__form__block--horizontal">
-                        <input type="number" class="form-control" id="velBx" placeholder="-2.5">
-                        <input type="number" class="form-control" id="velBz" placeholder="-2.5">
-                        <input type="number" class="form-control" id="velBy" placeholder="-2.5">
-                    </div>
-                    <div class="ctrl__form__label">
-                        <label for="velBx" class="form-label">Position of A (x, y, z) (m)</label>
-                    </div>
-                    <div class="ctrl__form__block--horizontal">
-                        <input type="number" class="form-control" id="posAx" placeholder="-2">
-                        <input type="number" class="form-control" id="posAz" placeholder="0">
-                        <input type="number" class="form-control" id="posAy" placeholder="0">
-                    </div>
-                    <div class="ctrl__form__label">
-                        <label for="posBx" class="form-label">Position of B (x, y, z) (m)</label>
-                    </div>
-                    <div class="ctrl__form__block--horizontal">
-                        <input type="number" class="form-control" id="posBx" placeholder="2">
-                        <input type="number" class="form-control" id="posBz" placeholder="0">
-                        <input type="number" class="form-control" id="posBy" placeholder="0">
+                        <input type="number" class="form-control" id="posx" placeholder="0">
+                        <input type="number" class="form-control" id="posz" placeholder="0">
+                        <input type="number" class="form-control" id="posy" placeholder="10">
                     </div>
                 </div> 
                 <button class="ctrl__btn btn btn-primary" id="ctrls-runsim-btn">Run Simulation</button>
                 <button class="ctrl__btn btn btn-secondary" id="ctrls-pause-play-btn">Pause / Play</button>
-            </div>
+            </div>  
         </div>
-        <table class="table">
-            <h1>Registered Collisions</h1>
-            <div class="table__btns">
-                <button class="table__btn btn btn-link" id="download-momentum">Download Momentum Data</button>
-                <button class="table__btn btn btn-link" id="download-velocity">Download Velocity Data</button>
-            </div>
-            <thead>
-                <tr>
-                <th scope="col">pax</th>
-                <th scope="col">pbx</th>
-                <th scope="col">pay</th>
-                <th scope="col">pby</th>
-                <th scope="col">paz</th>
-                <th scope="col">pbz</th>
-                <th scope="col">pax'</th>
-                <th scope="col">pbx'</th>
-                <th scope="col">pay'</th>
-                <th scope="col">pby'</th>
-                <th scope="col">paz'</th>
-                <th scope="col">pbz'</th>
-                </tr>
-            </thead>
-            <tbody id="table-data">
-            </tbody>
-        </table>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-    <script src="../loading.js"></script>   
     <script src="sketch.js"></script>
     <script src="particle.js"></script>
     <script src="ui.js"></script>
+    <script src="../loading.js"></script>
     <div class="ib-footer__wrapper">
         <div class="ib-footer__container">
             <img src="../imgs/ib-logo.png" class="ib-footer__img">

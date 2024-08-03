@@ -8,7 +8,6 @@ class Ray {
 	}
 
 	draw(scene) {
-
 		if (this.isSource) {
 			push();
 			translate(this.src);
