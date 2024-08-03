@@ -1,87 +1,60 @@
-let ray;
-let scene = []
-let interactions = []
+// define simulation variables
+let particle;
+let e = 1;
+let G = 9.81;
+let mass = 1;
+let pos = [0, -10, 0];
+let vel = [0, -20, 0];
+let size = 120;
 
-const UNCERTAINTY = 1e-6
+const DT = 1/60;
+let paused = false;
 
 function setup() {
-  createCanvas(window.innerWidth * 0.7, 760, WEBGL, document.getElementById('sketch'));
-  gl = this._renderer.GL;
-  gl.enable(gl.BLEND);
-  gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);   
-  ray = new Ray(createVector(0, 0, 0), createVector(50, 15, 0), 1, true);
-  scene.push(new BoxGeometry(75, 15, 40, createVector(0, 0, 0), 1.5));}
+  createCanvas(window.innerWidth / 2, 760, WEBGL, document.getElementById('sketch'));
+  particle = new Particle(mass, createVector(pos[0], pos[1], pos[2]), createVector(vel[0], vel[1], vel[2]), createVector(0, G, 0))
+}
 
 function draw() {
   // disable loading screen on first draw
   pageLoaded()
 
+  debugMode();
+  orbitControl();
+  perspective(0.4, (width / height), 10, 500000)
   background(0);
-  ambientLight(255);
-  perspective(0.2, (width / height), 10, 500000)
-  //camera(200, -400, 800);
-  //noLoop();
-  // debugMode()
-  orbitControl()
+  ambientLight(150);
 
-  // clear data
-  document.getElementById('table-data').innerHTML = '';
-  interactions = [];
+  // draw floor
+  push();
+  noStroke();
+  translate(0, 2, 0);
+  fill(255, 255, 255)
+  box(size, 2, size);
+  pop();
   
-  // load values from ui
-  let posX = parseFloat(document.getElementById('posX').value);
-  let posY = parseFloat(document.getElementById('posY').value);
-  let posZ = parseFloat(document.getElementById('posZ').value);
-
-  let dirX = parseFloat(document.getElementById('dirX').value);
-  let dirY = parseFloat(document.getElementById('dirY').value);
-  let dirZ = parseFloat(document.getElementById('dirZ').value);
-
-  let n = parseFloat(document.getElementById('n').value);
-
-  // prevent point from going into geometry
-  let isInGeometry = false;
-
-  for (let i = 0; i < scene.length; i++) {
-    if (scene[i].isInside(createVector(posX, -posY, posZ))) {
-      isInGeometry = true;
-    }
-  }
-  
-  if (!isInGeometry) {
-    ray.src.x = posX;
-    ray.src.y = -posY;
-    ray.src.z = posZ;
+  // update particle based on playing state
+  if (!paused) {
+    particle.update();
   }
 
-  ray.dir.x = dirX;
-  ray.dir.y = -dirY;
-  ray.dir.z = dirZ;
-
-  ray.dir.normalize();
-  
-  ray.draw(scene)
-  
-  for (let i = 0; i < scene.length; i++) {
-    scene[i].n = n;
-    scene[i].show();
+  // pause simulation when particle's y velocity is 0 or falls outside of sim size
+  if (particle.vel.y == 0) {
+    paused = true;
   }
 
+  if (particle.pos.x < -size || particle.pos.x > size) {
+    paused = true;
+  }
+
+  if (particle.pos.z < -size || particle.pos.z > size) {
+    paused = true;
+  }
+
+  particle.show();
+
+  // update displayed information
+  document.getElementById('v').innerHTML = `v = ${particle.vel.mag().toFixed(2)} m/s`;
+  document.getElementById('a').innerHTML = `a = ${particle.a.mag().toFixed(2)} m/s<sup>2</sup>`;
+  document.getElementById('h').innerHTML = `height = ${(-particle.pos.y - particle.r).toFixed(2)} m`;
 }
-
-document.getElementById('download').addEventListener('click', () => {
-  let data = interactions;
-  let headers = 'i/rad, c/rad, r/rad, n1, n2\n'
-  let strData = data.map(row => row.join(",")).join("\n");
-  let csvData = headers.concat(strData);
-  let blob = new Blob([csvData], { type: 'text/csv' });
-  let url = window.URL.createObjectURL(blob);
-
-  let a = document.createElement('a')
-  a.setAttribute('hidden', '');
-  a.setAttribute('href', url);
-  a.setAttribute('download', 'data.csv');
-  document.body.appendChild(a);
-  a.click();
-  document.body.removeChild(a);
-})
