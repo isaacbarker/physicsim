@@ -19,9 +19,6 @@ function draw() {
   background(0);
   ambientLight(255);
   perspective(0.2, (width / height), 10, 500000)
-  //camera(200, -400, 800);
-  //noLoop();
-  // debugMode()
   orbitControl()
 
   // clear data
@@ -66,7 +63,6 @@ function draw() {
     scene[i].n = n;
     scene[i].show();
   }
-
 }
 
 document.getElementById('download').addEventListener('click', () => {

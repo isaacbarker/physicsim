@@ -77,6 +77,7 @@ class Particle {
     }
     
     edges(size) {
+
       if (this.position.x > size - this.r) {
         this.position.x = size - this.r;
         this.velocity.x *= -1;
@@ -84,6 +85,7 @@ class Particle {
         this.position.x = -size + this.r;
         this.velocity.x *= -1;
       }
+
       if (this.position.y > size - this.r) {
         this.position.y = size - this.r;
         this.velocity.y *= -1;
@@ -102,12 +104,12 @@ class Particle {
     }
     
     show() {
-        push();
-        strokeWeight(.5)
-        fill(this.colR, this.colG, this.colB);
-        translate(this.position.x, this.position.y, this.position.z)
-        sphere(this.r, 128, 128);
-        pop();
+      push();
+      strokeWeight(.5)
+      fill(this.colR, this.colG, this.colB);
+      translate(this.position.x, this.position.y, this.position.z)
+      sphere(this.r, 128, 128);
+      pop();
     }
     
   }

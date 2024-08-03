@@ -1,3 +1,3 @@
 function pageLoaded() {
-    document.getElementById('loading-page').style.display = 'none'
+  document.getElementById('loading-page').style.display = 'none'
 }
