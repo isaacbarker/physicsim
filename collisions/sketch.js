@@ -14,7 +14,18 @@ let e = 1;
 let paused = false;
 
 function setup() {
-  createCanvas(window.innerWidth / 2, 760, WEBGL, document.getElementById('sketch'));
+  let viewWidth;
+  let viewHeight;
+
+  if (window.innerWidth < 600) {
+    viewWidth = window.innerWidth * 0.9
+    viewHeight = window.innerHeight * 0.75;
+  } else {
+    viewWidth = window.innerWidth * 0.5
+    viewHeight = document.getElementById('ctrl').offsetHeight;
+  }
+
+  createCanvas(viewWidth, viewHeight, WEBGL, document.getElementById('sketch'));
   particleA = new Particle(massA, posA[0], posA[1], posA[2], velA[0], velA[1], velA[2]);
   particleB = new Particle(massB, posB[0], posB[1], posB[2], velB[0], velB[1], velB[2]);
 }

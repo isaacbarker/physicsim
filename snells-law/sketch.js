@@ -5,7 +5,18 @@ let interactions = []
 const UNCERTAINTY = 1e-6
 
 function setup() {
-  createCanvas(window.innerWidth * 0.7, 760, WEBGL, document.getElementById('sketch'));
+  let viewWidth;
+  let viewHeight;
+
+  if (window.innerWidth < 600) {
+    viewWidth = window.innerWidth * 0.9
+    viewHeight = window.innerHeight * 0.75;
+  } else {
+    viewWidth = window.innerWidth * 0.75
+    viewHeight = document.getElementById('ctrl').offsetHeight;
+  }
+
+  createCanvas(viewWidth, viewHeight, WEBGL, document.getElementById('sketch'));
   gl = this._renderer.GL;
   gl.enable(gl.BLEND);
   gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);   
