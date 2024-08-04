@@ -6,7 +6,7 @@ This project stems from my Physics studies and aims to assist my revision by cre
 
 The project makes use of [p5.js](https://p5js.org/) and is inspired by Daniel Shiffman's [Coding Train](https://thecodingtrain.com/). 
 
-If you have any issues or corrections when using the project please open a ticket on Github or email [enquiries@physicsim.co.uk](enquiries@physicsim.co.uk).
+If you have any issues or corrections when using the project please open a ticket on Github or email [mailto:enquiries@physicsim.co.uk](enquiries@physicsim.co.uk).
 
 I hope you enjoy exploring the project,
 
