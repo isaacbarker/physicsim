@@ -11,7 +11,18 @@ const DT = 1/60;
 let paused = false;
 
 function setup() {
-  createCanvas(window.innerWidth / 2, 760, WEBGL, document.getElementById('sketch'));
+  let viewWidth;
+  let viewHeight;
+
+  if (window.innerWidth < 600) {
+    viewWidth = window.innerWidth * 0.9
+    viewHeight = window.innerHeight * 0.75;
+  } else {
+    viewWidth = window.innerWidth * 0.5
+    viewHeight = document.getElementById('ctrl').offsetHeight;
+  }
+
+  createCanvas(viewWidth, viewHeight, WEBGL, document.getElementById('sketch'));
   particle = new Particle(mass, createVector(pos[0], pos[1], pos[2]), createVector(vel[0], vel[1], vel[2]), createVector(0, G, 0))
 }
 
