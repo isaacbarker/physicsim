@@ -176,11 +176,6 @@ body, html {
 }
 
 .wrapper {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    width: 100vw;
     padding-bottom: 1em;
     text-align: center;
 }
@@ -277,7 +272,6 @@ body, html {
     text-align: center;
     margin: 0;
     padding: 0;
-    width: 70%;
 }
 
 .table__btns {
