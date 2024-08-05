@@ -181,7 +181,7 @@ body, html {
     align-items: center;
     flex-direction: column;
     width: 100vw;
-    padding-bottom: 2.5em;
+    padding-bottom: 1em;
     text-align: center;
 }
 
@@ -273,7 +273,11 @@ body, html {
 }
 
 .table {
+    overflow-x: scroll;
     text-align: center;
+    margin: 0;
+    padding: 0;
+    width: 70%;
 }
 
 .table__btns {
@@ -297,6 +301,11 @@ body, html {
         width: 90vw;
     }
 
+    .wrapper {
+        width: 100%;
+        overflow-x: scroll;
+    }
+
     .sim-wrapper {
         flex-direction: column;
     }
@@ -309,14 +318,5 @@ body, html {
         max-width: 100%;
         min-width: none;
         margin-left: 0;
-    }
-
-    .table {
-        font-size: 7px;
-    }
-
-    #table-data {
-        margin: 0;
-        padding: 0;
     }
 }
