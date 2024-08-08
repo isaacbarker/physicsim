@@ -8,7 +8,7 @@ let r = 83.33;
 let points = [];
 let rotationalRef = false;
 let angularPriority = false;
-let accelerationPriority = false;
+let accelerationPriority = true;
 let paused = false;
 let cam;
 

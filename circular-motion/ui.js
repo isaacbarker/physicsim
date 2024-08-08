@@ -15,21 +15,28 @@ document.getElementById('ctrls-pause-play-btn').addEventListener('click', () => 
     paused = !paused;
 })
 
+// reset simulation
+document.getElementById('ctrls-pause-reset').addEventListener('click', () => {
+    angularPriority = false;
+    document.getElementById('v-input').value = 10;
+    accelerationPriority = false;
+    document.getElementById('r-input').value = 83.3;
+    setup();
+})
+
 // change whether the simulation works in angular velocity or tangential velocity
 document.getElementById('v-input').addEventListener('mousedown', () => {
     angularPriority = false;
-    accelerationPriority = true;
 })
 
 document.getElementById('omega-input').addEventListener('mousedown', () => {
     angularPriority = true;
-    accelerationPriority = false;
+    accelerationPriority = true;
 })
 
 // change whether the simulation changes centripetal acceleration or radius
 document.getElementById('r-input').addEventListener('mousedown', () => {
     accelerationPriority = false;
-    angularPriority = true;
 })
 
 document.getElementById('a-input').addEventListener('mousedown', () => {
