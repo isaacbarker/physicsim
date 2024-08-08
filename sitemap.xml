@@ -4,27 +4,31 @@
       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
       xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
             http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
-<!-- created with Free Online Sitemap Generator www.xml-sitemaps.com -->
 
 
 <url>
   <loc>https://www.physicsim.co.uk/</loc>
-  <lastmod>2024-08-03T17:58:05+00:00</lastmod>
+  <lastmod>2024-08-08T16:09:53+00:00</lastmod>
   <priority>1.00</priority>
 </url>
 <url>
   <loc>https://www.physicsim.co.uk/collisions/</loc>
-  <lastmod>2024-08-03T17:58:05+00:00</lastmod>
+  <lastmod>2024-08-08T16:09:53+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
   <loc>https://www.physicsim.co.uk/snells-law/</loc>
-  <lastmod>2024-08-03T17:58:05+00:00</lastmod>
+  <lastmod>2024-08-08T16:09:53+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
   <loc>https://www.physicsim.co.uk/projectile-motion/</loc>
-  <lastmod>2024-08-03T17:58:05+00:00</lastmod>
+  <lastmod>2024-08-08T16:09:53+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.physicsim.co.uk/circular-motion/</loc>
+  <lastmod>2024-08-08T16:09:53+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 
