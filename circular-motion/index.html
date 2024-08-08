@@ -4,15 +4,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta
         name="description"
-        content="3D Physicics simulations made using p5js. Simulate collisions, Snell's Law and projectile motion using SUVAT equations. Simulations in some cases also include downloadable data which can be manipulated further in spreadsheet software."
+        content="Demonstrates circular motion equations and allows the change from an inertial to rotational frame of reference to show the presence of centrifugal forces."
     />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.4/p5.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.4/addons/p5.sound.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="../style.css">
     <meta charset="utf-8" />
     <link rel="icon" href="../imgs/favicon.ico">
-    <title>Physicsim</title>
+    <title>Physicsim (Circular Motion)</title>
   </head>
   <body>
+    <div class="loading-page" id="loading-page">
+        <div class="loading-page__container">
+            <img class="loading-page__logo" src="../imgs/dark-transparent.png">
+            <p class="loading-page__txt">Loading...</p>
+        </div>
+    </div>
+    <div class="dev-header__wrapper">
+        <p class="dev-header__txt">This simulation is still under development! If you identify any issues please email <a href="mailto:enquiries@physicsim.co.uk">here</a>.</p>
+    </div>
     <div class="ps-header__wrapper">
         <a href="/">
             <img class="ps-header__img" src="../imgs/dark-transparent.png">
@@ -26,44 +37,45 @@
             <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="#fff" viewBox="0 0 256 256"><path d="M219.31,108.68l-80-80a16,16,0,0,0-22.62,0l-80,80A15.87,15.87,0,0,0,32,120v96a8,8,0,0,0,8,8h64a8,8,0,0,0,8-8V160h32v56a8,8,0,0,0,8,8h64a8,8,0,0,0,8-8V120A15.87,15.87,0,0,0,219.31,108.68ZM208,208H160V152a8,8,0,0,0-8-8H104a8,8,0,0,0-8,8v56H48V120l80-80,80,80Z"></path></svg>
         </a>
     </div>
-    <div class="welcome-msg">
-        <h1 class="welcome-msg__title">Welcome to Physicsim.</h1>
-        <h5 class="welcome-msg__description">
-            Select a simulation by clicking Launch!
-        </h5>
-    </div>
-    <div class="grid-container">
-        <div class="grid-item-wrapper">
-            <div class="grid-item">
-                <img class="grid-item__img" src="imgs/collisions-screenshot.png" alt="3d collisions simulator">
-                <h2 class="grid-item__title">3D Collisions</h2>
-                <p class="grid-item__description">Simulates the Principle of Conservation of Momentum in a 3D environment allowing control of position, mass and velocity.</p>
-                <a class="btn btn-success" href="/collisions/" role="button">Launch</a>
+    <div class="wrapper">
+        <h1>Circular Motion</h1>
+        <p>Pan and Zoom within the simulation pane to view in 3D. Use controls on the right to set initial conditions of the simulation.</p>
+        <div class="sim-wrapper">
+            <div class="viewport">
+                <canvas id="sketch" class="sketch"></canvas>
+                <div class="ctrl__data">
+                    <p id="v"></p>
+                    <p id="omega"></p>
+                    <p id="a"></p>
+                    <p id="r"></p>
+                </div>
             </div>
-        </div>
-        <div class="grid-item-wrapper">
-            <div class="grid-item">
-                <img class="grid-item__img" src="imgs/snellslaw-screenshot.png" alt="snell's law simulator">
-                <h2 class="grid-item__title">Snell's Law</h2>
-                <p class="grid-item__description">Demonstrates Snell's Law and total internal reflection in 3D. Includes the ability to view the angles of incidence and refraction for each surface interaction.</p>
-                <a class="btn btn-success" href="/snells-law/" role="button">Launch</a>
-            </div>
-        </div>
-        <div class="grid-item-wrapper">
-            <div class="grid-item">
-                <img class="grid-item__img" src="imgs/projectiles-screenshot.png" alt="projectile motion simulator">
-                <h2 class="grid-item__title">Projectile Motion</h2>
-                <p class="grid-item__description">Simulates projectile motion using 'SUVAT' or constant accleration equations.</p>
-                <a class="btn btn-success" href="/projectile-motion/" role="button">Launch</a>
-            </div>
-        </div>
-        <div class="grid-item-wrapper">
-            <div class="grid-item">
-                <img class="grid-item__img" src="imgs/circular-motion-screenshot.png" alt="circular motion simulator">
-                <h2 class="grid-item__title">Circular Motion</h2>
-                <p class="grid-item__description">Demonstrates circular motion equations and allows the change from an inertial to rotational frame of reference to show the presence of centrifugal forces.</p>
-                <a class="btn btn-success" href="/circular-motion/" role="button">Launch</a>
-            </div>
+            <div class="ctrl" id="ctrl">
+                <div class="ctrl__form">
+                    <div class="ctrl__form__block--vertical">
+                        <label for="v-input" id="v-input-label" class="form-label">Tangential Velocity / ms<sup>-1</sup></label>
+                        <input type="range" class="form-range" min="5" max="25" value="10" step="0.1" id="v-input">
+                    </div>
+                    <div class="ctrl__form__block--vertical">
+                        <label for="omega-input" id="omega-input-label" class="form-label">Angular Velocity / rads<sup>-1</sup></label>
+                        <input type="range" class="form-range" min="0.05" max="0.32" value="0.12" step="0.001" id="omega-input">
+                    </div>
+                    <hr>
+                    <div class="ctrl__form__block--vertical">
+                        <label for="r-input" id="r-input-label" class="form-label">Radius / m</label>
+                        <input type="range" class="form-range" min="10" max="200" value="100" step="0.1" id="r-input">
+                    </div>
+                    <div class="ctrl__form__block--vertical">
+                        <label for="a-input" id="a-input-label" class="form-label">Centripetal Acceleration / ms<sup>-2</sup></label>
+                        <input type="range" class="form-range" min="2" max="10" value="5" step="0.1" id="a-input">
+                    </div>
+                </div> 
+                <div class="ctrl__form__block--horizontal">
+                    <button class="ctrl__btn btn btn-primary" id="ref">Rotational Reference</button>
+                    <button class="ctrl__btn btn btn-secondary" id="ctrls-pause-play-btn">Pause / Play</button>
+                    <button class="ctrl__btn btn btn-secondary" id="ctrls-pause-reset">Reset Sim</button>
+                </div>
+            </div>  
         </div>
     </div>
     <div class="footer__wrapper">
@@ -80,10 +92,13 @@
             </p>
         </div>   
         <div class="footer__container">
-            <a href="/"><img class="footer__img--physicsim" src="imgs/dark-transparent.png"></a>
-            <a href="https://www.isaacbarker.net" target="_"><img class="footer__img--ib-logo" src="imgs/ib-logo.png"></a>
+            <a href="/"><img class="footer__img--physicsim" src="../imgs/dark-transparent.png"></a>
+            <a href="https://www.isaacbarker.net" target="_"><img class="footer__img--ib-logo" src="../imgs/ib-logo.png"></a>
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="sketch.js"></script>
+    <script src="ui.js"></script>
+    <script src="../loading.js"></script>
   </body>
 </html>

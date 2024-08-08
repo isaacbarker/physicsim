@@ -112,6 +112,7 @@ body, html {
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    margin-bottom: 1em;
 }
 
 .loading-page__logo {
@@ -136,13 +137,13 @@ body, html {
 .grid-container {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    margin-bottom: 4em;
 }
 
 .grid-item-wrapper {
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-bottom: 2em;
 }
 
 .grid-item {
@@ -208,7 +209,7 @@ body, html {
     padding: 1em;
     background-color: var(--bs-dark-bg-subtle);
     border-radius: 1em;
-    width: 50vw;
+    width: 100%;
     -webkit-box-shadow: 0px 0px 45px -7px rgba(0,0,0,0.75);
     -moz-box-shadow: 0px 0px 45px -7px rgba(0,0,0,0.75);
     box-shadow: 0px 0px 45px -7px rgba(0,0,0,0.75);
@@ -302,10 +303,6 @@ body, html {
 
     .sim-wrapper {
         flex-direction: column;
-    }
-
-    .ctrl__data {
-        width: 100%;
     }
 
     .ctrl {
