@@ -27,16 +27,18 @@ document.getElementById('ctrls-pause-reset').addEventListener('click', () => {
 // change whether the simulation works in angular velocity or tangential velocity
 document.getElementById('v-input').addEventListener('mousedown', () => {
     angularPriority = false;
+    accelerationPriority = false;
 })
 
 document.getElementById('omega-input').addEventListener('mousedown', () => {
     angularPriority = true;
-    accelerationPriority = true;
+    accelerationPriority = false;
 })
 
 // change whether the simulation changes centripetal acceleration or radius
 document.getElementById('r-input').addEventListener('mousedown', () => {
     accelerationPriority = false;
+    angularPriority = false;
 })
 
 document.getElementById('a-input').addEventListener('mousedown', () => {
