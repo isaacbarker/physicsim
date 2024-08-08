@@ -18,7 +18,7 @@ document.getElementById('ctrls-pause-play-btn').addEventListener('click', () => 
 // change whether the simulation works in angular velocity or tangential velocity
 document.getElementById('v-input').addEventListener('mousedown', () => {
     angularPriority = false;
-    accelerationPriority = false;
+    accelerationPriority = true;
 })
 
 document.getElementById('omega-input').addEventListener('mousedown', () => {
