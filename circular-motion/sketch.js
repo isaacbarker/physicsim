@@ -138,7 +138,7 @@ function draw() {
 
 }
 
-    // draw vector arrows
+// draw vector arrows
 function drawArrow(base, vec, arrowSize, scale, colour) {
     push();
     translate(base.x, base.y, base.z);
