@@ -134,6 +134,22 @@ body, html {
     text-align: center;
 }
 
+.welcome-msg-nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.welcome-msg-link {
+    margin: 0 1em 0 1em;
+    color: var(--bs-body);
+}
+
+.grid-header {
+    width: 100vw;
+    text-align: center;
+}
+
 .grid-container {
     display: grid;
     grid-template-columns: repeat(3, 1fr);

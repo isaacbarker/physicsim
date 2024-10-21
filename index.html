@@ -31,7 +31,11 @@
         <h5 class="welcome-msg__description">
             Select a simulation by clicking Launch!
         </h5>
+        <p class="welcome-msg-nav">
+            <a class="welcome-msg-link" onclick="document.getElementById('mechanics').scrollIntoView()">Mechanics</a>|<a class="welcome-msg-link" onclick="document.getElementById('waves').scrollIntoView()">Waves</a>
+        </p>
     </div>
+    <h1 class="grid-header" id="mechanics">Mechanics</h1>
     <div class="grid-container">
         <div class="grid-item-wrapper">
             <div class="grid-item">
@@ -39,14 +43,6 @@
                 <h2 class="grid-item__title">3D Collisions</h2>
                 <p class="grid-item__description">Simulates the Principle of Conservation of Momentum in a 3D environment allowing control of position, mass and velocity.</p>
                 <a class="btn btn-success" href="/collisions/" role="button">Launch</a>
-            </div>
-        </div>
-        <div class="grid-item-wrapper">
-            <div class="grid-item">
-                <img class="grid-item__img" src="imgs/snellslaw-screenshot.png" alt="snell's law simulator">
-                <h2 class="grid-item__title">Snell's Law</h2>
-                <p class="grid-item__description">Demonstrates Snell's Law and total internal reflection in 3D. Includes the ability to view the angles of incidence and refraction for each surface interaction.</p>
-                <a class="btn btn-success" href="/snells-law/" role="button">Launch</a>
             </div>
         </div>
         <div class="grid-item-wrapper">
@@ -63,6 +59,17 @@
                 <h2 class="grid-item__title">Circular Motion</h2>
                 <p class="grid-item__description">Demonstrates circular motion equations and allows the change from an inertial to rotational frame of reference to show the presence of centrifugal forces.</p>
                 <a class="btn btn-success" href="/circular-motion/" role="button">Launch</a>
+            </div>
+        </div>
+    </div>
+    <h1 class="grid-header" id="waves">Waves</h1>
+    <div class="grid-container">
+        <div class="grid-item-wrapper">
+            <div class="grid-item">
+                <img class="grid-item__img" src="imgs/snellslaw-screenshot.png" alt="snell's law simulator">
+                <h2 class="grid-item__title">Snell's Law</h2>
+                <p class="grid-item__description">Demonstrates Snell's Law and total internal reflection in 3D. Includes the ability to view the angles of incidence and refraction for each surface interaction.</p>
+                <a class="btn btn-success" href="/snells-law/" role="button">Launch</a>
             </div>
         </div>
     </div>
