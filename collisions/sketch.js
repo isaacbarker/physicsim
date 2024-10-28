@@ -17,12 +17,16 @@ function setup() {
   let viewWidth;
   let viewHeight;
 
-  if (window.innerWidth < 600) {
+  if (window.innerWidth < 800) {
     viewWidth = window.innerWidth * 0.9
     viewHeight = window.innerHeight * 0.75;
   } else {
     viewWidth = window.innerWidth * 0.5
     viewHeight = document.getElementById('ctrl').offsetHeight;
+  }
+
+  if (viewHeight < window.innerHeight * 0.75) {
+    viewHeight = window.innerHeight * 0.75
   }
 
   createCanvas(viewWidth, viewHeight, WEBGL, document.getElementById('sketch'));
