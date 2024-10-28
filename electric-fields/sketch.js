@@ -53,7 +53,7 @@ function draw() {
       let res = getVecE(pos);
 
       // draw arrow
-      let sf = 1e12;
+      let sf = 1e10;
       
       let E = res.mag();
 
